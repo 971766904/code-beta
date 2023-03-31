@@ -1,0 +1,7 @@
+# SHAP应用
+## 1. shap.force_plot()
+- shap.force_plot()不能直接显示，存储也有需要额外处理。
+- 单一样本：`shap.force_plot(expected_value, shap_values[0][0, :], heart_disease_features.iloc[0, :], show=False, matplotlib=True).savefig('scratch_2.png', format="png", dpi=150, bbox_inches='tight')`
+- 多样本：`plot = shap.force_plot(expected_value, shap_values[0][:10, :], heart_disease_features.iloc[:10, :], show=False) shap.save_html("index.htm", plot)`
+- 注意：: I use a keras sequential model with DeepExplainer. In this case you have to transform the "expected_value" because the model output is a tf.tensor:
+expected_value= tf.keras.backend.get_value(explainer.expected_value[0])
